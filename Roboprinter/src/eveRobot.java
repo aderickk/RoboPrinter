@@ -19,8 +19,9 @@ public class eveRobot {
 	private static RegulatedMotor rightWheelMotor = new EV3LargeRegulatedMotor(MotorPort.C);
 	private static RegulatedMotor armMotor = new EV3LargeRegulatedMotor(MotorPort.D);
 
+	private static final float COMPENSATION = 2.66f;
 	private static final int WHEEL_DEGREE = 7;
-	private static final float ARM_DEGREE = 15.4f; // 2.2 scale with wheel degree
+	private static final float ARM_DEGREE = WHEEL_DEGREE * COMPENSATION;
 	private static final int PEN_DEGREE = 50;
 	private static final int ACCELERATION = 20;
 
