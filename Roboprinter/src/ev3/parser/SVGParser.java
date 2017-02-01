@@ -87,8 +87,8 @@ public class SVGParser {
 
         // Match <polyline> elements.
         NodeList polyline = svg.getElementsByTagName("polyline");
-        for (int i = 0; i < polyline.getLength(); i++) {
-            String points = polygon.item(i).getAttributes().getNamedItem("points").getNodeValue();
+        for (int i = 0; i < polyline.getLength(); i++) { 
+            String points = polyline.item(i).getAttributes().getNamedItem("points").getNodeValue(); 
             els.add(polyline(points));
         }
 
@@ -391,7 +391,7 @@ public class SVGParser {
 
     public static void main(String[] args) {
         SVGParser parser = new SVGParser();
-        Document doc = parser.loadFile("C:\\Users\\user\\Desktop\\svg\\as.svg");
+        Document doc = parser.loadFile("C:\\Users\\user\\Google Drive\\MCP\\triangle2.svg");
         parser.convert(doc);
         System.out.println(parser.getStatements().toString());  
         

@@ -24,12 +24,11 @@ public class SVGCanvas extends JPanel {
         this.setBackground(Color.white);
     }
 
-    public void paintInCanvas(String function, ArrayList<Line> linesToDraw) {
-		System.out.println("function: " + function);
+    public void paintInCanvas(String function, ArrayList<Line> linesToDraw) { 
 		lines = linesToDraw;
 	}
 
-    public void paint(Graphics g) {
+    public void paint(Graphics g) { 
         super.paint(g); // clears drawing area
         g.setColor(Color.black);
         for (Line l : lines) {
@@ -38,4 +37,8 @@ public class SVGCanvas extends JPanel {
 
     } // end method paint 
 
+    public void paintCurrentLine(int index){
+    	this.getGraphics().setColor(Color.red);
+    	this.getGraphics().drawLine(lines.get(index).getX0(), lines.get(index).getY0(), lines.get(index).getX1(),lines.get(index).getY1());
+    }
 }

@@ -9,9 +9,11 @@ import ev3.parser.Line;
 import ev3.parser.ElsNode;
 import ev3.parser.SVGParser;
 import java.awt.Dimension;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -152,11 +154,16 @@ public class main extends javax.swing.JFrame {
 	private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		OutputStream os = null;
 		DataOutputStream output = null;
+		DataInputStream input = null;
+		InputStream is = null;
 		Socket socket = null;
 		try {
 			socket = new Socket("10.0.1.1", 1111);
 			os = socket.getOutputStream();
 			output = new DataOutputStream(os);
+			
+			is = socket.getInputStream();
+			input = new DataInputStream(is);
 			
 			// send the svg dimensions first
 			String dimension = svgDimension.width + " " + svgDimension.height;
@@ -166,14 +173,24 @@ public class main extends javax.swing.JFrame {
 				output.writeUTF(line.getEv3LineFormat());
 			}
 			
+			while(input.available()>0){
+				canvas.paintCurrentLine(Integer.parseInt(input.readUTF()));
+			}
+			
+			
+			
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally{
 			try {
+				if (is != null)
+					is.close(); 
+				if (input != null)
+					input.close();
 				if (os != null)
-					os.close();
+					os.close(); 
 				if (output != null)
 					output.close();
 				if (socket != null)
@@ -208,6 +225,8 @@ public class main extends javax.swing.JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new main().setVisible(true);
+				
+				
 			}
 		});
 	}
