@@ -22,6 +22,7 @@ public class RoboPrinterMain {
 	private static DataInputStream input;
 	private static DataOutputStream output;
 	
+	
 	private static PrintData printData;
 
 	public static void main(String[] args) throws InterruptedException {
@@ -40,6 +41,7 @@ public class RoboPrinterMain {
 			input = new DataInputStream(is);
 			output = new DataOutputStream(os);
 			
+			
 			// first read width and height
 			String line = input.readUTF();
 			printData.setSourceDimensions(line);
@@ -47,10 +49,9 @@ public class RoboPrinterMain {
 			while(input.available() > 0){
 				line = input.readUTF();
 				//System.out.println(line);
-				
 				printData.addLine(line);
 			}
-			
+			draw();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,15 +70,17 @@ public class RoboPrinterMain {
 			}
 		}
 
-		draw();
+		
 
 	}
 
-	private static void draw() {
+	private static void draw() throws IOException {
 		eve.reset_position();
-		
+		Integer i = 0;
 		for (PrintData.Line line : printData.getLines()) {
+			output.writeUTF(i.toString());
 			eve.do_drawing(line.getStartX(), line.getStartY(), line.getTargetX(), line.getTargetY());
+			i++;
 		}
 	}
 
