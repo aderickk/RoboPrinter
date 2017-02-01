@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class PrintData {
 	
-	private static final int NUMBER_OF_ARM_STEPS = 70;
-	private static final int NUMBER_OF_WHEEL_STEPS = 100;
+	private static final int NUMBER_OF_ARM_STEPS = 75;
+	private static final int NUMBER_OF_WHEEL_STEPS = 75;
 	
 	private int sourceCanvasWidth;
 	private int sourceCanvasHeight;

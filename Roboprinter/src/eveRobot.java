@@ -22,7 +22,7 @@ public class eveRobot {
 	private static final float COMPENSATION = 2.66f;
 	private static final int WHEEL_DEGREE = 7;
 	private static final float ARM_DEGREE = WHEEL_DEGREE * COMPENSATION;
-	private static final int PEN_DEGREE = 50;
+	private static final int PEN_DEGREE = 45;
 	private static final int ACCELERATION = 20;
 
 	private Bresenham bresenAlgo;
